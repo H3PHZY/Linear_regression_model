@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import os
 from typing import Any, Dict
 
 from fastapi import FastAPI, File, HTTPException, UploadFile
@@ -8,15 +7,6 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 
 from prediction import predict_wei, retrain_and_save
-
-
-def _parse_cors_origins() -> list[str]:
-    """
-    Comma-separated env var e.g.:
-      CORS_ORIGINS="https://my-render-app.onrender.com,http://localhost:3000"
-    """
-    raw = os.getenv("CORS_ORIGINS", "http://localhost:3000,http://localhost:8080")
-    return [o.strip() for o in raw.split(",") if o.strip()]
 
 
 app = FastAPI(
@@ -27,8 +17,8 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=_parse_cors_origins(),
-    allow_credentials=True,
+    allow_origins=["*"],
+    allow_credentials=False,
     allow_methods=["POST", "GET", "OPTIONS"],
     allow_headers=["Authorization", "Content-Type", "Accept"],
 )
@@ -90,7 +80,6 @@ def predict(req: PredictRequest) -> PredictResponse:
         )
         return PredictResponse(predicted_wei=predicted)
     except ValueError as e:
-        # e.g. unseen categorical labels during LabelEncoder.transform
         raise HTTPException(status_code=422, detail=str(e))
     except Exception:
         raise HTTPException(status_code=500, detail="Prediction failed due to server error.")

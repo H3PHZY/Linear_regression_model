@@ -10,28 +10,13 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'WEI Predictor',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
+
         useMaterial3: true,
         scaffoldBackgroundColor: const Color(0xFFE3F2FD),
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo),
@@ -44,15 +29,6 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
 
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
   final String title;
 
   @override
@@ -60,12 +36,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  // Android emulator: 10.0.2.2 maps to your machine's localhost.
-  // If you run on a physical device, use your PC's LAN IP instead.
-  static const String apiBaseUrl = 'http://10.0.2.2:8000';
+  static const String apiBaseUrl = 'https://linear-regression-model-noqn.onrender.com';
   static const String predictPath = '/predict';
 
-  // Categorical values must match what the model saw during LabelEncoding.
   static const List<String> womenEmpowermentOptions = [
     'High',
     'Low',
@@ -277,7 +250,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           },
                           isExpanded: true,
                           decoration: const InputDecoration(
-                            labelText: "Women's Empowerment Group - 2022",
+                            labelText: "Women's Empowerment Group",
                             filled: true,
                             fillColor: formFill,
                             border: OutlineInputBorder(
@@ -293,7 +266,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             decimal: true,
                           ),
                           decoration: const InputDecoration(
-                            labelText: 'Global Gender Parity Index (GGPI) - 2022',
+                            labelText: 'Global Gender Parity Index (GGPI)',
                             hintText: 'e.g., 0.87',
                             filled: true,
                             fillColor: formFill,
@@ -323,7 +296,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           },
                           isExpanded: true,
                           decoration: const InputDecoration(
-                            labelText: 'Gender Parity Group - 2022',
+                            labelText: 'Gender Parity Group',
                             filled: true,
                             fillColor: formFill,
                             border: OutlineInputBorder(
@@ -352,7 +325,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           },
                           isExpanded: true,
                           decoration: const InputDecoration(
-                            labelText: 'Human Development Group - 2021',
+                            labelText: 'Human Development Group',
                             filled: true,
                             fillColor: formFill,
                             border: OutlineInputBorder(
